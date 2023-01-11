@@ -4,12 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <title>Extractor de billetes</title>
 </head>
+
 <body>
-
-
-
+    <div class="Registrar">
+        <h1>Bienvenido/a al simulador de cajero automatico</h1>
+        <h2 class="registro-title">Registrese a continuacion</h2>
+        <ul class="registro">
+            <li>
+                <label for="usuario-reg">Usuario</label>
+                <input type="text" id="usuario-reg">
+            </li>
+            <li>
+                <label for="password-reg">Contraseña</label>
+                <input type="password" id="password-reg">
+            </li>
+            <button class="btn-reg">Registrarse</button>
+            <p class="text-opcion-inicio">O si ya te registraste :</p>
+            <a href="./Pages/inicio.html"><button class="btn-signIn">Inicia Sesion</button></a>
+        </ul>
+    </div>
 <script src="./scripts/simulador.js"></script>
 </body>
 </html>

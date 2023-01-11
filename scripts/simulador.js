@@ -1,93 +1,119 @@
-class Usuario {
-    constructor(nombre,edad,saldo){
-        this.nombre = nombre;
-        this.edad = edad;
-        this.saldo = saldo;
-    }
+// --------------------------------------------- REGISTRO --------------------------------------------- //
 
-    retirar(saldo) {
 
-        if (saldo >= 1000) {
-        var billetes1000=0;
-        while (saldo >= 1000){
-            saldo= saldo - 1000;
-            this.saldo = this.saldo - 1000
-            billetes1000=billetes1000+1
-        }
-        if (billetes1000>1){
-            console.log("Se extrajo, ",billetes1000,"billetes de $1000")
-        }
-        else {
-            console.log("Se extrajo, ",billetes1000,"billete de $1000")
-        }
-    }
-    
-        if (saldo >= 500) {
-            var billetes500=0;
-            while (saldo >= 500){
-                saldo= saldo - 500;
-                this.saldo = this.saldo - 500
-                billetes500=billetes500+1
-            }
-            if (billetes500>1){
-                console.log("Se extrajo, ",billetes500,"billetes de $500")
-            }
-            else {
-                console.log("Se extrajo, ",billetes500,"billete de $500")
-            }
-        }
-    
-        if (saldo >= 200) {
-            var billetes200=0;
-            while (saldo >= 200){
-                saldo= saldo - 200;
-                this.saldo = this.saldo - 200
-                billetes200=billetes200+1
-            }
-            if (billetes200>1){
-                console.log("Se extrajo, ",billetes200,"billetes de $200")
-            }
-            else {
-                console.log("Se extrajo, ",billetes200,"billete de $200")
-            }
-        }
-    
-        if (saldo >= 100) {
-            var billetes100=0;
-            while (saldo >= 100){
-                saldo= saldo - 100;
-                this.saldo = this.saldo - 100
-                billetes100=billetes100+1
-            }
-            if (billetes100>1){
-                console.log("Se extrajo, ",billetes100,"billetes de $100")
-            }
-            else {
-                console.log("Se extrajo, ",billetes100,"billete de $100")
-            }
-        }
-    
-        if (saldo > 0 && saldo < 100){
-            alert("solo se pueden extraer multiplos de 100, quedan $"+this.saldo+"en la cuenta")
-        }
-    }
 
+
+
+
+var array_usuarios = [];
+
+$(".btn-reg").click(function(){
+    var usuarios = localStorage.getItem("usuarios");
+    usuarios = JSON.parse(usuarios);
+    console.log(usuarios);
+    if (usuarios === null) {
+        object_usuario = {nombre: $("#usuario-reg").val(), contraseña: $("#password-reg").val()}
+        array_usuarios.push(object_usuario);
+        let array_json = JSON.stringify(array_usuarios);
+        localStorage.setItem("usuarios",array_json);
+        $("#usuario-reg").val("")
+        $("#password-reg").val("")
+        alert("Se registro correctamente \n\n\n A continuacion inicie sesion")
+        location.href = "./Pages/inicio.html"
+    }
+    else {
+        array_usuarios = usuarios;
+        object_usuario = {nombre: $("#usuario-reg").val(), contraseña: $("#password-reg").val()}
+        array_usuarios.push(object_usuario);
+        let array_json = JSON.stringify(array_usuarios);
+        localStorage.setItem("usuarios",array_json);
+        $("#usuario-reg").val("")
+        $("#password-reg").val("")
+        alert("Se registro correctamente \n\n\n A continuacion inicie sesion")
+        location.href = "./Pages/inicio.html"
+    }
+})
+
+
+
+
+
+
+
+
+// --------------------------------------------- INICIO --------------------------------------------- //
+
+$(".datos-inc").hide();
+var nombre_ingreso = ""
+$(".btn-login").click(function(){
+let get_local = localStorage.getItem("usuarios");
+get_local = JSON.parse(get_local);
+let usuario_logIn = $("#usuario-login").val();
+let password_logIn = $("#password-login").val();
+for (const usuario of get_local) {
+    if (usuario_logIn === usuario.nombre && password_logIn === usuario.contraseña){
+
+        nombre_ingreso = usuario.nombre;
+        localStorage.setItem("nombre-ingreso",nombre_ingreso);
+
+        alert(`Bienvenido/a ${usuario.nombre}`);
+        location.href = "../Pages/simulador.html"
+    }
+    else {
+        $(".datos-inc").show();
+        $("#usuario-login").val("")
+        $("#password-login").val("")
+    }
 }
 
-var nombre = prompt("Ingrese su nombre")
-var edad = prompt("Ingrese su edad")
+})
 
-var persona = new Usuario(nombre,edad,160000)
 
-alert("Hola "+persona.nombre+" usted tiene $"+persona.saldo)
 
-var dinero_extraccion = prompt("Cuanto dinero desea extraer ?")
 
-while (dinero_extraccion>persona.saldo) {
-    alert("El monto ingresado, supera el saldo en su cuenta")
-    dinero_extraccion = prompt("Por favor, ingrese un monto menor")
-}
 
-persona.retirar(dinero_extraccion)
 
-console.log(persona.saldo)
+
+// --------------------------------------------- SIMULADOR --------------------------------------------- //
+let saldo = 0;
+let name = localStorage.getItem("nombre-ingreso")
+$(".dinero-en-cuenta").append(`<h1>Hola ${name}, bienvenido/a al simulador de cajero automatico </h1>`);
+$(".dinero-en-cuenta").append(`<h2>Su dinero en cuenta es $${saldo}</h2>`);
+console.log(nombre_ingreso)
+
+$(".btn-dep").click(function(){
+    let depositar = $(".input-dep").val();
+    if(depositar<=0){
+        alert("Por favor, introduzca un numero mayor a 0 para depositar")
+        $(".input-dep").val("");
+    }
+    else {
+        alert(`${name}, deposito correctamente $${depositar}`)
+        saldo = saldo + parseInt(depositar);
+        $("h2").text(`Su dinero en cuenta es $${saldo}`)
+        $(".input-dep").val("");
+    }
+
+})
+
+
+$(".btn-ext").click(function(){
+    let extraer = $(".input-ext").val();
+    if(extraer<=0 ){
+        alert("Por favor, introduzca un numero mayor a 0 para extraer")
+        $(".input-ext").val("")
+    }
+    else if ((saldo-parseInt(extraer)<0)) {
+        alert("Usted no posee dinero para realizar esta extraccion")
+        $(".input-ext").val("")
+    }
+    
+
+    else {
+        alert(`${name}, extrajo correctamente $${extraer}`)
+        saldo = saldo - parseInt(extraer);
+        $("h2").text(`Su dinero en cuenta es $${saldo}`)
+        $(".input-ext").val("")
+    }
+
+})
