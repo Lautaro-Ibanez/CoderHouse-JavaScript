@@ -162,3 +162,61 @@ font-size: 14px;
 color: red;
 display: flex;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.clima {
+    margin-right: 60px;
+    border-radius: 6px;
+    width: 400px;
+    height: 200px;
+    background-color: #004766;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+}
+
+.titleClima {
+background-color: aliceblue;
+height: 15%;
+width: 100%;
+text-align: center;
+}
+
+.box-clima {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.temperatura {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.temp-text {
+    font-size: 14px;
+    color: white;
+}
+
+.estado {
+    display: flex;
+    align-items: center;
+}
+
+.infoEstado {
+    font-size: 20px;
+    color: white;
+}
+
+#iconoAnimado {
+    width: 40%;
+}

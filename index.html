@@ -11,22 +11,35 @@
 
 <body>
     <div class="Registrar">
-        <h1>Bienvenido/a al simulador de cajero automatico</h1>
+    <h1>Bienvenido/a al simulador de cajero automatico</h1>
         <h2 class="registro-title">Registrese a continuacion</h2>
-        <ul class="registro">
-            <li>
-                <label for="usuario-reg">Usuario</label>
-                <input type="text" id="usuario-reg">
-            </li>
-            <li>
-                <label for="password-reg">Contraseña</label>
-                <input type="password" id="password-reg">
-            </li>
-            <button class="btn-reg">Registrarse</button>
-            <p class="text-opcion-inicio">O si ya te registraste :</p>
-            <a href="./Pages/inicio.html"><button class="btn-signIn">Inicia Sesion</button></a>
-        </ul>
+        <div class="container">
+            <ul class="registro">
+                <li>
+                    <label for="usuario-reg">Usuario</label>
+                    <input type="text" id="usuario-reg">
+                </li>
+                <li>
+                    <label for="password-reg">Contraseña</label>
+                    <input type="password" id="password-reg">
+                </li>
+                <button class="btn-reg">Registrarse</button>
+                <p class="text-opcion-inicio">O si ya te registraste :</p>
+                <a href="./Pages/inicio.html"><button class="btn-signIn">Inicia Sesion</button></a>
+            </ul>
+            <div class="clima">
+                <span class="titleClima"> Demostracion uso de fetch </span>
+                <div class="box-clima">
+                    <div class="temperatura"></div>
+                    <div class="estado">
+                        <img id="iconoAnimado" src="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
 <script src="./scripts/simulador.js"></script>
+<script src="./scripts/clima.js"></script>
 </body>
 </html>
